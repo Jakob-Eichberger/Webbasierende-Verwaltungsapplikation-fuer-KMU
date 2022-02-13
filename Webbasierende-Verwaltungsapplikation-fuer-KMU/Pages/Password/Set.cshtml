@@ -1,0 +1,55 @@
+﻿@page "{Id}/{Token}"
+@model Webbasierende_Verwaltungsapplikation_fuer_KMU.Pages.User.SetPasswordModel
+@{
+    ViewData["Title"] = "Set Password";
+    Layout = "_LayoutFullScreen";
+}
+<div class="container-fluid">
+    <div class="animated fadeIn">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card-group">
+                    <div class="card p-4">
+                        <form method="post" asp-route-Id="@Model.Id" asp-rout-Token="@Model.Token">
+                            <div class="card-body">
+                                <h1>Passwort eingeben.</h1>
+                                <p class="text-muted">Geben Sie ein neues Passwort ein.</p>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="icon-user"></i>
+                                        </span>
+                                    </div>
+                                    <input class="form-control" type="password" placeholder="Password" asp-for="Password.First">
+                                </div>
+                                <div class="input-group mb-4">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="icon-lock"></i>
+                                        </span>
+                                    </div>
+                                    <input class="form-control" type="password" placeholder="Passwort" asp-for="Password.Second">
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <input class="btn btn-primary px-4" type="submit" value="Speichern" />
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+                        {
+                            <p class="text-danger">@Model.ErrorMessage</p>
+                        }
+                        @if (!string.IsNullOrEmpty(Model.SuccessMessage))
+                        {
+                            <p class="text-success">@Model.SuccessMessage</p>
+                        }
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

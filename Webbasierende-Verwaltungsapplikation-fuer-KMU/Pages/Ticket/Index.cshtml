@@ -1,0 +1,381 @@
+﻿@page "{guid}"
+@model Webbasierende_Verwaltungsapplikation_fuer_KMU.Pages.Ticket.IndexModel
+@{
+}
+@section Breadcrumb{
+    <ol class="breadcrumb">
+        <li class=" breadcrumb-item">
+            @switch (Model.Ticket.Order.Customer.Role)
+            {
+                case Webbasierende_Verwaltungsapplikation_fuer_KMU.Model.Role.Customer:
+                    <a asp-page="/Customer/Profile" asp-route-guid="@Model.Ticket.Order.Customer.Guid">Profile</a>
+                    break;
+                case Webbasierende_Verwaltungsapplikation_fuer_KMU.Model.Role.Company:
+                    <a asp-page="/Company/Profile" asp-route-guid="@Model.Ticket.Order.Customer.Guid">Profile</a>
+                    break;
+                default:
+                    <a asp-page="/Index">Home</a>
+                    break;
+            }
+        </li>
+        <li class="breadcrumb-item">
+            <a asp-page="/Order/Index" asp-route-guid="@Model.Ticket.Order.Guid">Order</a>
+        </li>
+        <li class="breadcrumb-item active">Ticket</li>
+    </ol>
+}
+<div class="container">
+    @if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+    {
+        <div class="alert alert-danger" role="alert">@Model.ErrorMessage</div>
+    }
+
+    @if (!string.IsNullOrWhiteSpace(Model.SuccessMessage))
+    {
+        <div class="alert alert-success" role="alert">@Model.SuccessMessage</div>
+    }
+    <div class=" row">
+        <div class="col">
+            <h2 class="h2">@Model.Ticket.Name.ToString()</h2>
+            <br />
+            <h4 class="h4">Beschreibung</h4>
+            <div class=" text-left">
+                <p>
+                    @Model.Ticket.Description.ToString()
+                </p>
+            </div>
+        </div>
+        <div class="col">
+
+            <div class="input-group mb-3 ">
+                <div class=" input-group-append">
+                    <span class="input-group-text">
+                        Status
+                    </span>
+                </div>
+                <label class="form-control">@Model?.Ticket?.Status?.Name</label>
+            </div>
+            <div class="input-group mb-3 ">
+                <div class=" input-group-append">
+                    <span class="input-group-text">
+                        Priorität
+                    </span>
+                </div>
+                <label class="form-control">@Model?.Ticket?.Priority.ToString()</label>
+            </div>
+            <div class="input-group mb-3 ">
+                <div class=" input-group-append">
+                    <span class="input-group-text">
+                        Erstellt am
+                    </span>
+                </div>
+                <label class="form-control ">@Model?.Ticket?.Created.ToString()</label>
+            </div>
+            <div class="input-group mb-3 ">
+                <div class=" input-group-append">
+                    <span class="input-group-text">
+                        Letzte Änderung
+                    </span>
+                </div>
+                <label class="form-control ">@Model?.Ticket?.LastUpdated.ToString()</label>
+            </div>
+            <div class="input-group mb-3 ">
+                <div class=" input-group-append">
+                    <span class="input-group-text">
+                        Mitarbeiter
+                    </span>
+                </div>
+                <label class="form-control ">
+                    @if (Model!._authService.IsEmployee)
+                    {
+                        <a asp-page="/Employee/Profile" asp-route-guid="@Model!.Ticket!.EmployeeParty!.Guid">
+                            @Model?.Ticket?.EmployeeParty?.Fullname
+                        </a>
+                    }
+                    else
+                    {
+                        @Model?.Ticket?.EmployeeParty?.Fullname
+                    }
+                </label>
+            </div>
+        </div>
+    </div>
+    <br />
+    @if (Model!._authService.IsEmployee)
+    {
+        <div class="row">
+            <div class="col">
+                <h4 class="h4">Notiz</h4>
+                <div class="form-group">
+                    <p>
+                        @Model?.Ticket?.Note?.ToString()
+                    </p>
+                    <br />
+                </div>
+            </div>
+            <div class="col">
+                <div class="input-group-prepend pt-4">
+                    <div class="btn-group-vertical ">
+                        @if ((Model?._authService?.IsEmployee ?? false) && Model.Ticket?.Order.OrderStatus == Webbasierende_Verwaltungsapplikation_fuer_KMU.Model.OrderStatus.Open)
+                        {
+                            <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#exampleModal">Zeit buchen</button>
+                            <br />
+                            <a asp-page="/Ticket/Edit" asp-route-guid="@Model?.Ticket?.Guid">
+                                <input class="btn btn-primary" type="button" value="Ticket bearbeiten" />
+                            </a>
+                        }
+                    </div>
+                </div>
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Zeit buchen</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <form method="post" asp-page-handler="AddTimeElement" asp-route-guid="@Model?.Ticket?.Guid">
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="recipient-name" class="col-form-label">Minuten:</label>
+                                        <input type="number" asp-for="Time" class="form-control" id="recipient-name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="message-text" class="col-form-label">Beschreibung:</label>
+                                        <textarea class="form-control" asp-for="Description" id="message-text"></textarea>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Schließen</button>
+                                    <input type="submit" class="btn btn-primary" value="Speichern" />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    <hr class="mt-3 mb-3" />
+    <div>
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#Elemente" role="tab">Elemente</a>
+            </li>
+            @if ((Model?._authService?.IsEmployee ?? false))
+            {
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#Tags" role="tab">Tags</a>
+                </li>
+            }
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#Dokumente" role="tab">Dokumente</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active" id="Elemente" role="tabpanel">
+                <table class="table table-responsive-sm table-hover table-outline mb-0">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Beschreibung</th>
+                            <th>Erstellt am</th>
+                            <th>Menge</th>
+                            <th>Preis</th>
+                            @if ((Model?._authService?.IsEmployee ?? false) && Model.Ticket?.Order.OrderStatus == Webbasierende_Verwaltungsapplikation_fuer_KMU.Model.OrderStatus.Open)
+                            {
+
+                                <th>Bearbeiten</th>
+                                <th>Löschen</th>
+                            }
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in (Model?.Ticket?.Elements ?? new()))
+                        {
+                            <tr>
+                                <td>@item?.Description</td>
+                                <td>@item?.Created.ToString()</td>
+                                <td>@item?.Ammount.ToString()</td>
+                                <td>@item?.PricePerItem.ToString()€</td>
+                                @if ((Model?._authService?.IsEmployee ?? false) && Model.Ticket?.Order.OrderStatus == Webbasierende_Verwaltungsapplikation_fuer_KMU.Model.OrderStatus.Open)
+                                {
+
+                                    <td><a class="btn btn-warning icon-note" asp-page="/Element/Edit" asp-route-guid="@item?.Guid"></a></td>
+
+                                    <td>
+                                        <form method="post" asp-page-handler="DeleteElement" asp-route-elementGuid="@item?.Guid" asp-route-guid="@Model!.Ticket!.Guid">
+                                            <button type="submit" class="btn btn-danger icon-trash"></button>
+                                        </form>
+                                    </td>
+                                }
+                            </tr>
+                        }
+                        @if ((Model?._authService?.IsEmployee ?? false) && Model.Ticket?.Order.OrderStatus == Webbasierende_Verwaltungsapplikation_fuer_KMU.Model.OrderStatus.Open)
+                        {
+                            <tr>
+                                <td><a class="btn btn-primary" asp-page="/Element/Add" asp-route-guid="@Model?.Ticket?.Guid">Elemente hinzufügen</a></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+            @if ((Model?._authService?.IsEmployee ?? false))
+            {
+                <div class="tab-pane" id="Tags" role="tabpanel">
+                    <table class="table table-responsive-sm table-hover table-outline mb-0">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>Name</th>
+                                <th>Löschen</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model?.Ticket?.Tags?.ToList() ?? new())
+                            {
+                                <tr>
+                                    <td><a href="#">@item.Name</a></td>
+                                    <td>
+                                        <form asp-page-handler="DeleteTag" asp-route-tagGuid="@item.Guid" asp-route-ticketGuid="@Model!.Ticket!.Guid">
+                                            <button class="btn btn-danger icon-trash" type="submit"></button>
+                                        </form>
+                                    </td>
+                                </tr>
+
+                            }
+                            <tr>
+                                <td>
+                                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#AddTag"> Tag hinzufügen! </button>
+                                    <div class="modal fade" id="AddTag" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title">Neues Tag</h4>
+                                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                                <form method="post" asp-page-handler="AddTag" asp-route-guid="@Model?.Ticket?.Guid">
+                                                    <div class="modal-body">
+                                                        <input class="form-control" asp-for="TagDto.Name">
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Abbrechen</button>
+                                                        <button class="btn btn-success" type="submit">Tag hinzufügen!</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            }
+            <div class="tab-pane" id="Dokumente" role="tabpanel">
+                <table class="table table-responsive-sm table-hover table-outline mb-0">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Name</th>
+                            <th> </th>
+                            @if ((Model?._authService?.IsEmployee ?? false) && Model.Ticket?.Order.OrderStatus == Webbasierende_Verwaltungsapplikation_fuer_KMU.Model.OrderStatus.Open)
+                            {
+                                <th>Löschen</th>
+                            }
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in (Model?.Ticket?.Documents ?? new()))
+                        {
+                            @if (Model!._authService!.IsEmployee || !Model._authService.IsEmployee && item.DocumentType != Webbasierende_Verwaltungsapplikation_fuer_KMU.Model.DocumentType.CompanyIntern)
+                            {
+                                <tr>
+                                    <td>
+                                        <a>@item.GetFullFileName</a>
+                                    </td>
+                                    <td>
+                                        <form method="post" asp-page-handler="DownloadDocument" asp-route-documentGuid="@item.Guid" , asp-route-guid="@Model.Ticket?.Guid">
+                                            <button class="btn btn-sm btn-primary" type="submit">Download</button>
+                                        </form>
+                                    </td>
+                                    @if ((Model?._authService?.IsEmployee ?? false) && Model.Ticket?.Order.OrderStatus == Webbasierende_Verwaltungsapplikation_fuer_KMU.Model.OrderStatus.Open)
+                                    {
+                                        <td>
+                                            @if (item.DocumentType != Webbasierende_Verwaltungsapplikation_fuer_KMU.Model.DocumentType.Invoice)
+                                            {
+                                                <button class="btn btn-danger icon-trash" type="button" data-toggle="modal" data-target="#@string.Concat("Delete", item.Guid)"></button>
+                                                <div class="modal fade" id="@string.Concat("Delete", item.Guid)" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h4 class="modal-title">Dokument Löschen?</h4>
+                                                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">×</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <p>Sind Sie sicher dass Sie das Dokument '@item.GetFullFileName' löschen möchten!</p>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <form method="post" asp-page-handler="DeleteDocument" asp-route-documentGuid="@item.Guid" asp-route-guid="@Model.Ticket.Guid">
+                                                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                                                                    <button class="btn btn-primary" type="submit">Dokument Löschen</button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+                                        </td>
+                                    }
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+                @if ((Model?._authService?.Rights?.CanUploadFiles ?? false))
+                {
+
+                    <button class="btn btn-primary mt-3" type="button" data-toggle="modal" data-target="#UploadFile">Upload File</button>
+                    <div class="modal fade" id="UploadFile" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Dokument Hochladen</h4>
+                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form method="post" enctype="multipart/form-data" asp-page-handler="UploadDocument">
+                                        <div class="custom-file">
+                                            <input type="file" value="Select File" asp-for="UploadedDocument" />
+                                            @if (Model._authService.IsEmployee)
+                                            {
+                                                <select name="DocumentType" class="form-select">
+                                                    <option value="0">Standard</option>
+                                                    <option value="1">Firma Intern</option>
+                                                </select>
+                                            }
+                                            <input class="btn btn-info" type="submit" />
+                                        </div>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+

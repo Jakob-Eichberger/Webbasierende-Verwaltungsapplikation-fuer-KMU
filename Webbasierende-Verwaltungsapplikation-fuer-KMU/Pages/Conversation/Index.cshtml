@@ -1,0 +1,74 @@
+﻿@page "{guid}"
+@model Webbasierende_Verwaltungsapplikation_fuer_KMU.Pages.Message.IndexModel
+@{
+
+
+}
+@section Breadcrumb{
+    <ol class="breadcrumb">
+        <li class=" breadcrumb-item">
+            @switch (Model.Conversation.CreatedByParty.Role)
+            {
+                case Webbasierende_Verwaltungsapplikation_fuer_KMU.Model.Role.Customer:
+                    <a asp-page="/Customer/Profile" asp-route-guid="@Model.Conversation.CreatedByParty.Guid">Profil</a>
+                    break;
+                case Webbasierende_Verwaltungsapplikation_fuer_KMU.Model.Role.Company:
+                    <a asp-page="/Company/Profile" asp-route-guid="@Model.Conversation.CreatedByParty.Guid">Profil</a>
+                    break;
+                default:
+                    <a asp-page="/Party/Index">Home</a>
+                    break;
+            }
+        </li>
+        @if (Model.Conversation.Order is not null)
+        {
+            <li class="breadcrumb-item">
+                <a asp-page="/Order/Index" asp-route-guid="@Model.Conversation.Order.Guid">Order</a>
+            </li>
+        }
+    </ol>
+}
+<div class="container">
+    <div class="animated fadeIn">
+        <div class="col justify-content-center">
+            <div class="col-md-10">
+                @if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+                {
+                    <div class="alert alert-danger" role="alert">@Model.ErrorMessage</div>
+                }
+
+                @if (!string.IsNullOrWhiteSpace(Model.SuccessMessage))
+                {
+                    <div class="alert alert-success" role="alert">@Model.SuccessMessage</div>
+                }
+                @foreach (var message in Model.Messages.OrderBy(e => e.MessageSent))
+                {
+                    string card = "";
+                    if (message.SendByParty.Role == Webbasierende_Verwaltungsapplikation_fuer_KMU.Model.Role.Employee) { card = "card border-primary"; }
+                    else { card = "card"; }
+                    <div class="@card">
+                        <div class="card-header">
+                            @message.SendByParty.Fullname
+                            <div class="card-header-actions">
+                                <a class="card-header-action">
+                                    @message.MessageSent
+                                </a>
+                            </div>
+                        </div>
+                        <div class="collapse show" id="collapseExample">
+                            <div class="card-body">
+                                @message.Text
+                            </div>
+                        </div>
+                    </div>
+                }
+                <br />
+                <form method="post" asp-page-handler="AddMessage" asp-route-guid="@Model.Guid">
+                    <textarea class=" form-control" asp-for="Text" style=" min-height:75% ; max-width:100%" type="text" placeholder="Neue Nachricht"></textarea>
+                    <br />
+                    <button class="btn btn-block btn-success" type="submit">Senden</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

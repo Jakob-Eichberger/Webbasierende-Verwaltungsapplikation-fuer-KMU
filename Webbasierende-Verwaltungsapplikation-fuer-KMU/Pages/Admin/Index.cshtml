@@ -1,0 +1,25 @@
+﻿@page
+@model Webbasierende_Verwaltungsapplikation_fuer_KMU.Pages.Admin.IndexModel
+@{
+}
+<div class="container">
+    @if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+    {
+        <div class="alert alert-danger" role="alert">@Model.ErrorMessage</div>
+    }
+
+    @if (!string.IsNullOrWhiteSpace(Model.SuccessMessage))
+    {
+        <div class="alert alert-success" role="alert">@Model.SuccessMessage</div>
+    }
+    <a href="/Admin/EditAGB"><input class="btn btn-info" type="button" value="AGB's ändern." /></a>
+    <br />
+    <br />
+    <a href="/Employee/Add"><input class="btn btn-info" type="button" value="Employee hinzufügen." /></a>
+    <br />
+    <br />
+
+    <form method="post" asp-page-handler="DeleteAllFiles">
+        <button class="btn btn-danger" type="submit">Delete All Files in Blob</button>
+    </form>
+</div>

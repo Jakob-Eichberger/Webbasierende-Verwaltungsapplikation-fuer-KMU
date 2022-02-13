@@ -1,0 +1,117 @@
+﻿@page "{guid}"
+@model Webbasierende_Verwaltungsapplikation_fuer_KMU.Pages.User.Address.EditModel
+@{
+}
+<div class="container">
+    <h2 class="h2">Adresse</h2>
+    @if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+    {
+        <div class="alert alert-danger" role="alert">@Model.ErrorMessage</div>
+    }
+
+    @if (!string.IsNullOrWhiteSpace(Model.SuccessMessage))
+    {
+        <div class="alert alert-success" role="alert">@Model.SuccessMessage</div>
+    }
+    <br />
+    <form method="post">
+
+        <div class="row">
+            <div class="col">
+                <div class="input-group ">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            Land
+                        </span>
+                    </div>
+                    <input class="form-control" asp-for="AddressDto.Country">
+                </div>
+                <span class="text-danger small" asp-validation-for="AddressDto.Country"></span>
+                <br />
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            Bundesland
+                        </span>
+                    </div>
+                    <input class="form-control" asp-for="AddressDto.State">
+                </div>
+                <span class="text-danger small" asp-validation-for="AddressDto.State"></span>
+                <br />
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            Stadt
+                        </span>
+                    </div>
+                    <input class="form-control" asp-for="AddressDto.City">
+                </div>
+                <span class="text-danger small" asp-validation-for="AddressDto.City"></span>
+                <br />
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            Postleitzahl
+                        </span>
+                    </div>
+                    <input class="form-control" asp-for="AddressDto.ZipCode">
+                </div>
+                <span class="text-danger small" asp-validation-for="AddressDto.ZipCode"></span>
+                <br />
+            </div>
+            <div class="col">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            Straße
+                        </span>
+                    </div>
+                    <input class="form-control" asp-for="AddressDto.Street">
+                </div>
+                <span class="text-danger small" asp-validation-for="AddressDto.Street"></span>
+                <br />
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            Hausnummer
+                        </span>
+                    </div>
+                    <input class="form-control" asp-for="AddressDto.HouseNumber">
+                </div>
+                <span class="text-danger small" asp-validation-for="AddressDto.HouseNumber"></span>
+                <br />
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            Stiege
+                        </span>
+                    </div>
+                    <input class="form-control" asp-for="AddressDto.StairCase">
+                </div>
+                <span class="text-danger small" asp-validation-for="AddressDto.StairCase"></span>
+                <br />
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            Türnummer
+                        </span>
+                    </div>
+                    <input class="form-control" asp-for="AddressDto.DoorNumber">
+                </div>
+                <span class="text-danger small" asp-validation-for="AddressDto.DoorNumber"></span>
+                <br />
+            </div>
+            <div class="input-group mb-3 ml-3">
+                <input class="form-control form-check form-check-input" style="max-width: 7%; margin-left: 0px; margin-top: 0px;" asp-for="AddressDto.IsPrimary">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                        Diese Adresse als primäre Adresse setzen.
+                    </span>
+                </div>
+            </div>
+        </div>
+        <a class="btn btn-danger " asp-page="/@Model.PartyName/Profile" asp-route-guid="@Model.PartyGuid">Abbrechen</a>
+        <button class="btn btn-primary" type="submit">Speichern</button>
+    </form>
+
+</div>

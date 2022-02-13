@@ -1,0 +1,83 @@
+﻿@page "{guid}"
+@model Webbasierende_Verwaltungsapplikation_fuer_KMU.Pages.Ticket.AddModel
+@{
+}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="container">
+            <form method="post">
+                <div class="input-group ">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <strong style="font-weight:400">Titel</strong>
+                        </span>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <input class="form-control" asp-for="TicketDto.Name" />
+                </div>
+                <span class=" text-danger small" asp-validation-for="TicketDto.Name"></span>
+                <br/>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <strong style="font-weight:400">Beschreibung</strong>
+                        </span>
+                    </div>
+                </div>
+                <div class="input-group ">
+                    <textarea class=" form-control" asp-for="TicketDto.Description" style=" min-height: 50px; max-width:100%" type="text"></textarea>
+                </div>
+                <span class=" text-danger small" asp-validation-for="TicketDto.Description"></span>
+                <br/>
+                <div class="input-group ">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <strong style="font-weight:400">Status</strong>
+                        </span>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <select class="custom-select" asp-for="@Model.TicketDto.StatusId" asp-items="@Model.Statuss"></select>
+                </div>
+                <br/>
+                <div class="input-group ">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <strong style="font-weight:400">Priotität</strong>
+                        </span>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <select class="custom-select" asp-items="@Model.Prioritys" asp-for="@Model.TicketDto.Priority"></select>
+                </div>
+                <br/>
+                <div class="input-group ">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <strong style="font-weight:400">Notiz</strong>
+                        </span>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <textarea class="form-control" asp-for="@Model.TicketDto.Note"></textarea>
+                </div>
+                <br/>
+                <div class="input-group ">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <strong style="font-weight:400">Mitarbeiter</strong>
+                        </span>
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    <select class="custom-select" asp-for="@Model.TicketDto.EmployeePartyId" asp-items="@Model.Employees"></select>
+                </div>
+                <span class="text-danger small" asp-validation-for="TicketDto.Note"></span>
+                <br />
+                <button class="btn btn-primary" type="submit">Speichern</button>
+                <a class="btn btn-primary" asp-page="/Order/Index" asp-route-guid="@Model.guid)">Abbrechen</a>
+            </form>
+        </div>
+    </div>
+</div>

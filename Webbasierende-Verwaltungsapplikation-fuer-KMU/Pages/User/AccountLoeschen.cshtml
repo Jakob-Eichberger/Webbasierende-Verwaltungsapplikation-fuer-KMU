@@ -1,0 +1,37 @@
+﻿@page
+@model Webbasierende_Verwaltungsapplikation_fuer_KMU.Pages.User.AccountLoeschenModel
+@{
+}
+<div class="container">
+
+    <div class="card text-white bg-primary py-5">
+        <div class="card-body text-center">
+            <div>
+                <h2>Account löschen</h2>
+                <p>-Hier steht text-</p>
+                <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#AddTag">Account Löschen!</button>
+                <div class="modal fade" id="AddTag" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Account löschen</h4>
+                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Sind Sie sicher, dass Sie ihren Account löschen wollen? Dieser Vorgang kann nicht rückgängig gemacht werden.</p>
+                            </div>
+                            <div class="modal-footer">
+                                <form method="post">
+                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Abbrechen</button>
+                                    <input class="btn btn-success" type="submit" value="Ja ich bin sicher!" />
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

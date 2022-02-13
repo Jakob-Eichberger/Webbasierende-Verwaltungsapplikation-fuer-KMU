@@ -1,0 +1,91 @@
+﻿@inject Webbasierende_Verwaltungsapplikation_fuer_KMU.Service.AuthService authService
+@inject Webbasierende_Verwaltungsapplikation_fuer_KMU.Service.BaseService service
+@{
+    var found = service.GetTable<Webbasierende_Verwaltungsapplikation_fuer_KMU.Model.Party>().FirstOrDefault(i => i.Id == authService.PartyId);
+    Guid guid = found?.Guid ?? Guid.Empty;
+}
+<div class="sidebar">
+    <nav class="sidebar-nav">
+        <ul class="nav">
+            @if (authService.IsAdmin || authService.IsEmployee)
+            {
+                <li class="nav-item">
+                    <a class="nav-link" asp-page="/Search/Index">
+                        <i class="nav-icon icon-note"></i> Suche
+                    </a>
+                </li>
+            }
+            @if (authService.IsAdmin)
+            {
+                <li class="nav-item">
+                    <a class="nav-link" asp-page="/Admin/Index">
+                        <i class="nav-icon icon-badge"></i> Home
+                    </a>
+                </li>
+            }
+            @if (authService.IsCustomer)
+            {
+                <li class="nav-item">
+                    <a class="nav-link" asp-page="/Party/Index">
+                        <i class="nav-icon icon-badge"></i> Home
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-page="/Customer/Profile" asp-route-guid="@guid">
+                        <i class="nav-icon icon-badge"></i> Profile
+                    </a>
+                </li>
+            }
+            @if (authService.IsCompany)
+            {
+                <li class="nav-item">
+                    <a class="nav-link" asp-page="/Party/Index">
+                        <i class="nav-icon icon-badge"></i> Home
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-page="/Company/Profile" asp-route-guid="@guid">
+                        <i class="nav-icon icon-badge"></i> Profile
+                    </a>
+                </li>
+            }
+            @if (authService.IsEmployee)
+            {
+                <li class="nav-item">
+                    <a class="nav-link" asp-page="/Employee/Index">
+                        <i class="nav-icon icon-badge"></i> Home
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-page="/Employee/Profile" asp-route-guid="@guid">
+                        <i class="nav-icon icon-badge"></i> Profile
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-page="/Conversation/Overview">
+                        <i class="nav-icon icon-badge"></i> Anfragen
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-page="/Login">
+                        <i class="nav-icon icon-badge"></i> Account erstellen
+                    </a>
+                </li>
+            }
+            @if (authService.IsCustomerOrCompany)
+            {
+                <li class="nav-item">
+                    <a class="nav-link" asp-page="/User/AccountLoeschen">
+                        <i class="nav-icon icon-badge"></i> Account deaktivieren
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-page="/User/KontoInformationenAnfordern">
+                        <i class="nav-icon icon-badge"></i> Konto Informationen herunterladen
+                    </a>
+                </li>
+            }
+        </ul>
+    </nav>
+    <button class="sidebar-minimizer brand-minimizer" type="button"></button>
+</div>

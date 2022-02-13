@@ -1,0 +1,41 @@
+﻿@page
+@model Webbasierende_Verwaltungsapplikation_fuer_KMU.Pages.Admin.EditAGBModel
+@{
+}
+
+<div class="container">
+    @if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+    {
+        <div class="alert alert-danger" role="alert">@Model.ErrorMessage</div>
+    }
+
+    @if (!string.IsNullOrWhiteSpace(Model.SuccessMessage))
+    {
+        <div class="alert alert-success" role="alert">@Model.SuccessMessage</div>
+    }
+    <form method="post">
+        <textarea asp-for="TermsAndConditions" rows="15" class=" form-control"></textarea>
+        <br />
+        <a href="/Admin/Index"><input type="button" class="btn btn-secondary" value="Abbrechen" /></a>
+        <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#Save">Änderungen speichern</button>
+        <div class="modal fade" id="Save" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">AGBs ändern?</h4>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Sind Sie sicher dass Sie die AGB's ändern wollen? Nach einer Änderung an den AGB's, werden alle Kunden informiert.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Abbrechen</button>
+                        <input class="btn btn-primary" type="submit" value="Jetzt ändern" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

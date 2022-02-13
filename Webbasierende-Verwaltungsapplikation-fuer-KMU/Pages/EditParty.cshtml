@@ -1,0 +1,206 @@
+﻿@page
+@model Webbasierende_Verwaltungsapplikation_fuer_KMU.Pages.EditUserModel
+@{
+}
+
+@*
+    • All Fields from Customer/Employee/Company
+    • List with all Addresses (Edit Button, Delete Button, Set as Default Button)
+    • List with all Emails (Edit Button, Delete Button, Set as Default Button, Set as Login Email)
+    • List with all phone numbers (Textbox (Telefonnumber), DropDownMenu for Type, Edit Button, Delete Button)
+    • "Passwort Reset Link Anfordern" Button.
+*@
+
+<div class="container-fluid">
+    <div class="animated fadeIn">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class=" container">
+                    <div class="input-group mb-3">
+                        <input class="form-control" type="text" placeholder="Vorname">
+                        <input class="form-control" type="text" placeholder="Zuname">
+                    </div>
+                    <div class="input-group mb-3">
+                        <input class="form-control" type="text" placeholder="Firmen Name">
+                    </div>
+                    <div class="input-group mb-3">
+                        <input class="form-control" type="number" placeholder="UID">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <strong style="font-weight:400">Geschlecht</strong>
+                            </span>
+                        </div>
+                        <select name="Priorität" class="custom-select" ">
+                            <option value="m">m</option>
+                            <option value="w">w</option>
+                            <option value="u">u</option>
+                        </select>
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="icon-event"></i>
+                            </span>
+                        </div>
+                        <input class="form-control" type="date" placeholder="Gebutsdatum">
+                    </div>
+                    <div class="input-group mb-3">
+                        <input class="form-control" type="number" placeholder="Stundensatz">
+                    </div>
+                    Adressen:
+                    <div class="container">
+                        <table class="table table-responsive-sm table-hover table-outline mb-0">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>Straße</th>
+                                    <th>Hausnummer</th>
+                                    <th>Stiege</th>
+                                    <th>Plz</th>
+                                    <th>Stadt</th>
+                                    <th>Bearbeiten</th>
+                                    <th>Löschen</th>
+                                    <th>Standard</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th>Hansgasse</th>
+                                    <th>13</th>
+                                    <th></th>
+                                    <th>7</th>
+                                    <th>Wien</th>
+                                    <th>
+                                        <button class="btn btn-block btn-success" type="button">B</button>
+                                    </th>
+                                    <th>
+                                        <button class="btn btn-block btn-success" type="button">L</button>
+                                    </th>
+                                    <th>
+                                        <button class="btn btn-block btn-success" type="button">S</button>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th>Max Straße</th>
+                                    <th>101B</th>
+                                    <th>4</th>
+                                    <th>23</th>
+                                    <th>Stockerau</th>
+                                    <th>
+                                        <button class="btn btn-block btn-success" type="button">B</button>
+                                    </th>
+                                    <th>
+                                        <button class="btn btn-block btn-success" type="button">L</button>
+                                    </th>
+                                    <th>
+                                        <button class="btn btn-block btn-success" type="button">S</button>
+                                    </th>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <br />
+                    Email Adressen:
+                    <div class="container">
+                        <table class="table table-responsive-sm table-hover table-outline mb-0">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>E-Mail</th>
+                                    <th>Bearbeiten</th>
+                                    <th>Löschen</th>
+                                    <th>Standard</th>
+                                    <th>Login</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th>a@a.at</th>
+                                    <th>
+                                        <button class="btn btn-block btn-success" type="button">B</button>
+                                    </th>
+                                    <th>
+                                        <button class="btn btn-block btn-success" type="button">L</button>
+                                    </th>
+                                    <th>
+                                        <button class="btn btn-block btn-success" type="button">S</button>
+                                    </th>
+                                    <th>
+                                        <button class="btn btn-block btn-success" type="button">Log</button>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th>b@b.at</th>
+                                    <th>
+                                        <button class="btn btn-block btn-success" type="button">B</button>
+                                    </th>
+                                    <th>
+                                        <button class="btn btn-block btn-success" type="button">L</button>
+                                    </th>
+                                    <th>
+                                        <button class="btn btn-block btn-success" type="button">S</button>
+                                    </th>
+                                    <th>
+                                        <button class="btn btn-block btn-success" type="button">Log</button>
+                                    </th>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <br />
+                    Telefonnummern:
+                    <div class="container">
+                        <table class="table table-responsive-sm table-hover table-outline mb-0">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>Telefonnummer</th>
+                                    <th>Bearbeiten</th>
+                                    <th>Löschen</th>
+                                    <th>Standard</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th>0664 1234567</th>
+                                    <th>
+                                        <button class="btn btn-block btn-success" type="button">B</button>
+                                    </th>
+                                    <th>
+                                        <button class="btn btn-block btn-success" type="button">L</button>
+                                    </th>
+                                    <th>
+                                        <button class="btn btn-block btn-success" type="button">S</button>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th>06801334099</th>
+                                    <th>
+                                        <button class="btn btn-block btn-success" type="button">B</button>
+                                    </th>
+                                    <th>
+                                        <button class="btn btn-block btn-success" type="button">L</button>
+                                    </th>
+                                    <th>
+                                        <button class="btn btn-block btn-success" type="button">S</button>
+                                    </th>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="container">
+                        <th>
+                            <button class="btn btn-block btn-success">Password zurücksetzen</button>
+                        </th>
+                    </div>
+                    <br />
+                    <div class="container">
+                        <th>
+                            <button class="btn btn-block btn-success">Speichern</button>
+                            <button class="btn btn-block btn-success">Abbrechen</button>
+                        </th>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

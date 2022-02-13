@@ -1,0 +1,67 @@
+﻿@page
+@model Webbasierende_Verwaltungsapplikation_fuer_KMU.Pages.DevelopmentModel
+@{
+}
+<div class="container-fluid">
+    <div class="animated fadeIn">
+        <div class="col justify-content-center">
+            <div class="col-md-14">
+                <table class="table table-responsive-sm table-hover table-outline mb-0">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Type</th>
+                            <th>Email</th>
+                            <th>CanCreateNewConversation</th>
+                            <th>CanUploadNewDocuments</th>
+                            <th>Button</th>
+                            <th>Add Order</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.userList)
+                        {
+                            <tr>
+                                @*<td>@item.Fullname</td>*@
+                                <td>@item?.Role.ToString()</td>
+                                <td>@item?.User?.LoginEMail</td>
+                                <td>@item?.Rights?.CanCreateNewConversation.ToString()</td>
+                                <td>@item?.Rights?.CanUploadFiles.ToString()</td>
+                                <td>
+                                    <div>
+                                        <form method="post" asp-page-handler="SignIn" asp-route-email="@item?.User?.LoginEMail" asp-route-passwort="12345">
+                                            <input class="btn btn-block btn-outline-primary" type="submit" value="SignIn" />
+                                        </form>
+                                    </div>
+                                </td>
+                                <td>
+                                    <a asp-page="/Order/Add" asp-route-guid="@item?.Guid">
+                                        <input type="button" />
+                                    </a>
+                                </td>
+
+                            </tr>
+                        }
+                    </tbody>
+
+                </table>
+                <form method="post" asp-page-handler="SetAllTicketsToClosed">
+                    Set all Tickets closed for a Order:
+                    <input asp-for="OrderId" type="text" />
+                    <input type="submit" />
+                </form>
+
+                <form method="post" asp-page-handler="SetOrderClosed">
+                    Schließt eine Order:
+                    <input asp-for="OrderId" type="text" />
+                    <input type="submit" />
+                </form>
+
+                <form method="post" asp-page-handler="SendEMail">
+                   Send a mail to:
+                    <input asp-for="Mail" type="text" />
+                    <input type="submit" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

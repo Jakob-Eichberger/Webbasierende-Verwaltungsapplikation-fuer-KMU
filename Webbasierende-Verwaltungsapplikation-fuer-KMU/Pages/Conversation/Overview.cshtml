@@ -1,0 +1,40 @@
+﻿@page
+@model Webbasierende_Verwaltungsapplikation_fuer_KMU.Pages.Conversation.OverviewModel
+@{
+}
+<div class="container">
+    @if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+    {
+        <div class="alert alert-danger" role="alert">@Model.ErrorMessage</div>
+    }
+
+    @if (!string.IsNullOrWhiteSpace(Model.SuccessMessage))
+    {
+        <div class="alert alert-success" role="alert">@Model.SuccessMessage</div>
+    }
+    <table class="table table-responsive-sm table-hover table-outline mb-0">
+        <thead class="thead-light">
+            <tr>
+                <th>Anfragen</th>
+                <th>Letztes Update</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Conversation.OrderByDescending(e => e.Messages?.OrderByDescending(e => e.MessageSent)?.FirstOrDefault()?.MessageSent ?? new Webbasierende_Verwaltungsapplikation_fuer_KMU.Model.Message().MessageSent))
+            {
+                <tr>
+                    @{var text = new string(@item?.Messages?.OrderBy(e => e.MessageSent)?.FirstOrDefault()?.Text?.Take(100).ToArray());}
+                    <td><a asp-page="/Conversation/Index" asp-route-guid="@item!.Guid">@text</a></td>
+                    <td>@item?.Messages?.OrderByDescending(e => e.MessageSent)?.FirstOrDefault()?.MessageSent.ToString("dd-MM-yyyy HH:mm")</td>
+                </tr>
+            }
+            @if (!Model.Conversation.Any())
+            {
+                <tr>
+                    <td>Keine offenen Anfragen vorhanden.</td>
+                    <td></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,74 @@
+﻿@page
+@model Webbasierende_Verwaltungsapplikation_fuer_KMU.Pages.Employee.AddModel
+@{
+}
+<div class="container">
+    @if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+    {
+        <div class="alert alert-danger" role="alert">@Model.ErrorMessage</div>
+    }
+
+    @if (!string.IsNullOrWhiteSpace(Model.SuccessMessage))
+    {
+        <div class="alert alert-success" role="alert">@Model.SuccessMessage</div>
+    }
+    <form method="post">
+        <div class="input-group mt-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">
+                    <i class="icon-user"></i>
+                </span>
+            </div>
+            <input class="form-control" asp-for="EmployeeDto!.Person!.FirstName" type="text" placeholder="Vorname">
+            <input class="form-control" asp-for="EmployeeDto!.Person!.LastName" type="text" placeholder="Nachname">
+        </div>
+        <span class="text-danger small" asp-validation-for="EmployeeDto!.Person!.FirstName"></span>
+        <span class="text-danger small" asp-validation-for="EmployeeDto!.Person!.LastName"></span>
+        <div class="input-group mt-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">
+                    <strong style="font-weight:400">Geschlecht</strong>
+                </span>
+            </div>
+            <select asp-for="EmployeeDto!.Person!.Gender" name="Gender" class="custom-select" style="max-width:30%;">
+                <option value="0">Offen</option>
+                <option value="1">Weiblich</option>
+                <option value="2">Männlich</option>
+            </select>
+        </div>
+        <span class="text-danger small" asp-validation-for="EmployeeDto!.Person!.Gender"></span>
+        <div class="input-group mt-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">
+                    <i class="icon-phone"></i>
+                </span>
+            </div>
+            <input class="form-control" type="date" asp-for="EmployeeDto!.Person!.GebDate" placeholder="Geburtstag">
+        </div>
+        <span class="text-danger small" asp-validation-for="EmployeeDto!.Person!.GebDate"></span>
+        <div class="input-group mt-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">
+                    <i class="icon-phone"></i>
+                </span>
+            </div>
+            <input class="form-control" type="tel" asp-for="Phone" placeholder="Telefon">
+        </div>
+        <span class="text-danger small" asp-validation-for="Phone"></span>
+        <div class="input-group mt-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">@@</span>
+            </div>
+            <input class="form-control" asp-for="EmployeeDto.EMail" placeholder="E-Mail">
+        </div>
+        <span class="text-danger small" asp-validation-for="EmployeeDto.EMail"></span>
+        <div class="input-group mt-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">€</span>
+            </div>
+            <input class="form-control" type="number" asp-for="EmployeeDto.HourlyRate" placeholder="Stundensatz">
+        </div>
+        <span class="text-danger small" asp-validation-for="EmployeeDto.HourlyRate"></span><br />
+        <input type="submit" class="btn btn-success mt-3" value="Account erstellen" />
+    </form>
+</div>

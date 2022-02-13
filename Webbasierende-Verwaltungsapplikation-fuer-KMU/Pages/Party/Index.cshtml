@@ -1,0 +1,85 @@
+﻿@page
+@model Webbasierende_Verwaltungsapplikation_fuer_KMU.Pages.mainpages.UserModel
+@{
+}
+<div class="container-fluid">
+    @if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+    {
+        <div class="alert alert-danger" role="alert">@Model.ErrorMessage</div>
+    }
+
+    @if (!string.IsNullOrWhiteSpace(Model.SuccessMessage))
+    {
+        <div class="alert alert-success" role="alert">@Model.SuccessMessage</div>
+    }
+    <div class="animated fadeIn">
+        <div class="col container">
+            @if (Model.CanCreateNewConversation)
+            {
+                <div class="container">
+                    <a class="btn btn-primary w-75 " style="margin-left:10%;" asp-page="/Conversation/New">Neue Anfrage erstellen.</a>
+                </div>
+            }
+            <br />
+            <br />
+            <div class="container">
+                <table class="table table-responsive-sm table-hover table-outline mb-0">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Aufträge</th>
+                            <th>Letzte Änderung</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Party.Orders)
+                        {
+                            <tr>
+                                <td><a asp-page="/Order/Index" asp-route-guid="@item.Guid">@item.Name</a></td>
+                                <td>@item.LastUpdated.ToString()</td>
+                            </tr>
+                        }
+                        @if (!Model.Party.Orders.Any())
+                        {
+                            <tr>
+                                <td>Kein Auftrag vorhanden!</td>
+                                <td></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <br />
+            <br />
+            <br />
+            <div class="container">
+                <table class="table table-responsive-sm table-hover table-outline mb-0">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Anfragen</th>
+                            <th>Letztes Update</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Party.Conversations.OrderByDescending(e => e.Messages?.OrderByDescending(e => e.MessageSent)?.FirstOrDefault()?.MessageSent ?? new Webbasierende_Verwaltungsapplikation_fuer_KMU.Model.Message().MessageSent))
+                        {
+                            <tr>
+                                @{var text = new string(@item?.Messages?.OrderBy(e => e.MessageSent)?.FirstOrDefault()?.Text?.Take(100).ToArray());}
+                                <td><a asp-page="/Conversation/Index" asp-route-guid="@item!.Guid">@text</a></td>
+                                <td>@item?.Messages?.OrderByDescending(e => e.MessageSent)?.FirstOrDefault()?.MessageSent.ToString("dd-MM-yyyy HH:mm")</td>
+                            </tr>
+                        }
+                        @if (!Model.Party.Conversations.Any())
+                        {
+                            <tr>
+                                <td>Keine Anfragen vorhanden.</td>
+                                <td></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+</div>

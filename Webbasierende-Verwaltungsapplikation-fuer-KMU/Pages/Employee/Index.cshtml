@@ -1,0 +1,68 @@
+﻿@page
+@model Webbasierende_Verwaltungsapplikation_fuer_KMU.Pages.EmployeeIndexModel
+@{
+    ViewData["Title"] = "EmployeeMain";
+}
+
+<div class="container-fluid">
+    <div class="animated fadeIn">
+        <div class="col justify-content-center">
+            <div class="col-md-14">
+                <div class="container">
+                    @if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+                    {
+                        <div class="alert alert-danger" role="alert">@Model.ErrorMessage</div>
+                    }
+
+                    @if (!string.IsNullOrWhiteSpace(Model.SuccessMessage))
+                    {
+                        <div class="alert alert-success" role="alert">@Model.SuccessMessage</div>
+                    }
+                    <table class="table table-responsive-sm table-hover table-outline mb-0">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>Auftrags Name</th>
+                                <th>Ticket Name</th>
+                                <th>LastUpdated</th>
+                                <th>Priorität</th>
+                                <th>Staus</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.TicketList)
+                            {
+                                string priority = "";
+                                switch (item.Priority)
+                                {
+                                    case Webbasierende_Verwaltungsapplikation_fuer_KMU.Model.Priority.Highest:
+                                        priority = "badge badge-danger";
+                                        break;
+                                    case Webbasierende_Verwaltungsapplikation_fuer_KMU.Model.Priority.High:
+                                        priority = "badge badge-warning";
+                                        break;
+                                    case Webbasierende_Verwaltungsapplikation_fuer_KMU.Model.Priority.Medium:
+                                        priority = "badge badge-success";
+                                        break;
+                                    case Webbasierende_Verwaltungsapplikation_fuer_KMU.Model.Priority.Low:
+                                        priority = "badge badge-secondary";
+                                        break;
+                                    case Webbasierende_Verwaltungsapplikation_fuer_KMU.Model.Priority.Lowest:
+                                        priority = "badge badge-secondary";
+                                        break;
+                                };
+                                <tr>
+                                    <th> <a asp-page="/Order/Index" asp-route-guid="@item.Order.Guid">@item.Order.Name</a></th>
+                                    <th> <a asp-page="/Ticket/Index" asp-route-guid="@item.Guid"> @item.Name</a></th>
+                                    <th>@item.LastUpdated</th>
+                                    <th><div class="@priority">@item.Priority</div></th>
+                                    <th>@item.Status.Name</th>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,44 @@
+﻿@page
+@model Webbasierende_Verwaltungsapplikation_fuer_KMU.Pages.messeges.NewModel
+@{
+}
+<div class="container h-100">
+    <div class="container w-100 h-50">
+        @if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+        {
+            <div class="alert alert-danger" role="alert">@Model.ErrorMessage</div>
+        }
+
+        @if (!string.IsNullOrWhiteSpace(Model.SuccessMessage))
+        {
+            <div class="alert alert-success" role="alert">@Model.SuccessMessage</div>
+        }
+        <form method="post">
+            <h2 class="h2 p-4 "> Neue Nachricht </h2>
+            <div class="p-4 h-100 w-100" style="margin-bottom:-5% ">
+                <textarea asp-for="@Model.MessageDto.Text" class=" form-control" style=" min-height:65% ; max-width:100%" type="text" placeholder="bitte schreiben Sie hier ihre Nachricht "></textarea>
+                <span class=" text-danger small" asp-validation-for="@Model.MessageDto.Text"></span>
+                <br />
+                <br />
+                <script>
+                    //Add the following code if you want the name of the file appear on select
+                    $(".custom-file-input").on("change", function () {
+                        var fileName = $(this).val().split("\\").pop();
+                        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+                    });
+                </script>
+            </div>
+            <div class="container w-100 ">
+                <div class="container">
+                    <label class=" custom-control w-25 p-2 float-left">Zu welchem Ticket?</label>
+                    <select class="custom-select w-75 float-right " asp-items="Model.Orders" asp-for="OrderId">
+                        <option>Keine Auswahl</option>
+                    </select>
+                </div>
+                <div align="center">
+                    <button type="submit" class="btn m-3 btn-primary w-75">Nachricht senden</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

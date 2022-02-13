@@ -1,0 +1,20 @@
+﻿@inject Webbasierende_Verwaltungsapplikation_fuer_KMU.Service.AuthService authService
+
+<header class="app-header navbar">
+    <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="mr-2">
+        @if (authService.UserIsAuthenticated)
+        {
+            <a class="btn btn-block btn-outline-primary" asp-page="/Logout">@authService.Username abmelden</a>
+        }
+        else
+        {
+            <a class="btn btn-block btn-outline-primary" asp-page="/Login">Login</a>
+        }
+    </div>
+</header>

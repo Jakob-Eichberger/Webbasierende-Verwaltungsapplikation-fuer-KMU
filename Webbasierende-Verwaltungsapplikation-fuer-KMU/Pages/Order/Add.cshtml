@@ -1,0 +1,77 @@
+﻿@page "{guid}"
+@model Webbasierende_Verwaltungsapplikation_fuer_KMU.Pages.Order.AddModel
+@{
+}
+<div class="container-fluid">
+    <div class="animated fadeIn">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="container">
+                    <form method="post">
+                        <div class="input-group mb-3">
+                            <div class="input-group  ">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <strong style="font-weight:400">Name:</strong>
+                                    </span>
+                                </div>
+                                <div class="input-group  ">
+                                    <input class="form-control" type="text" asp-for="OrderDto.Name" placeholder="Titel">
+                                </div>
+                            </div>
+                            <span class="text-danger small" asp-validation-for="OrderDto.Name"></span>
+                        </div>
+                        <div class="h-50 w-100">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <strong style="font-weight:400">Beschreibung:</strong>
+                                </span>
+                            </div>
+                            <div class="input-group  ">
+
+                                <textarea class=" form-control" asp-for="OrderDto.Description" style=" min-height:45% ; max-width:100%" type="text" placeholder="Beschreibung"></textarea>
+                            </div>
+                            <span class="text-danger small" asp-validation-for="OrderDto.Description"></span>
+                        </div>
+                        <br />
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <strong style="font-weight:400">Interne Notiz:</strong>
+                            </span>
+                        </div>
+                        <div class="input-group  ">
+                            <textarea class="form-control col-md-12" asp-for="OrderDto.Note" placeholder="Interne Notiz"></textarea>
+                        </div>
+                        <span class="text-danger small" asp-validation-for="OrderDto.Note"></span>
+                        <br />
+
+                        <br />
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <strong style="font-weight:400">Lieferadresse</strong>
+                                </span>
+                            </div>
+                            <select asp-for="OrderDto.DeliveryAddressId"
+                                    asp-items="@Model.DeliveryAddress">
+                            </select>
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <strong style="font-weight:400">Rechnungsadresse</strong>
+                                </span>
+                            </div>
+                            <select asp-for="OrderDto.BillingAddressId"
+                                    asp-items="@Model.BillingAddress">
+                            </select>
+                        </div>
+
+                        <button class="btn btn-danger btn-primary">Abbrechen</button>
+                        <input type="submit" class="btn btn-primary" value="Speichern" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

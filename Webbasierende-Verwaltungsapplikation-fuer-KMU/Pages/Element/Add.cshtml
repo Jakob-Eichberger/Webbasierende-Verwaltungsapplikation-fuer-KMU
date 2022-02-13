@@ -1,0 +1,46 @@
+﻿@page "{guid}"
+@model Webbasierende_Verwaltungsapplikation_fuer_KMU.Pages.Element.AddModel
+@{
+}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="container">
+            @if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+            {
+                <div class="alert alert-danger" role="alert">@Model.ErrorMessage</div>
+            }
+            <form method="post">
+                <span class=" text-danger small" asp-validation-for="ElementDto.Description"></span>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <strong style="font-weight:400">Beschreibung</strong>
+                        </span>
+                    </div>
+                    <input type="text" class="form-control" asp-for="ElementDto.Description" />
+                </div>
+                <span class=" text-danger small" asp-validation-for="ElementDto.Ammount"></span>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <strong style="font-weight:400">Anzahl</strong>
+                        </span>
+                    </div>
+                    <input type="number" class=" form-control" asp-for="ElementDto.Ammount" />
+                </div>
+                <span class="text-danger small" asp-validation-for="ElementDto.Price"></span>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <strong style="font-weight:400">Preis pro Einheit (€)</strong>
+                        </span>
+                    </div>
+                    <input type="number" class="form-control" asp-for="@Model.ElementDto.Price" />
+                </div>
+                <br />
+                <button class="btn btn-primary" type="submit">Speichern</button>
+                @*       <a class="btn btn-primary" asp-page="/Ticket/Index" asp-route-guid="@Model.TicketGuid)">Abbrechen</a>*@
+            </form>
+        </div>
+    </div>
+</div>

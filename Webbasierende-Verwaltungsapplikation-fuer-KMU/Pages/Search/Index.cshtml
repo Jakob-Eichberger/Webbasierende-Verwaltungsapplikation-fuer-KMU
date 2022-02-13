@@ -1,0 +1,222 @@
+﻿@page
+@model Webbasierende_Verwaltungsapplikation_fuer_KMU.Pages.Search.IndexModel
+@{
+}
+<div class="container">
+    <div class="container-fluid">
+        <div class="animated fadeIn">
+            <form method="post">
+                @if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+                {
+                    <div class="alert alert-danger w-100" role="alert">@Model.ErrorMessage</div>
+                }
+                <div class="input-group-prepend  w-100">
+                    <input asp-for="SearchTerm" class="form-control" type="search" placeholder="Search">
+                    <button class="btn btn-outline-primary my-sm-0" type="submit">Search</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br />
+    @if (Model.Orders.Any() || Model.Tickets.Any() || Model.Parties.Any())
+    {
+        bool active = false;
+        string cssActive = "";
+        bool activeBody = false;
+        string cssActiveBody = "";
+        <div>
+            <ul class="nav nav-tabs" role="tablist">
+                @if (Model.Orders.Any())
+                {
+                    if (!active)
+                    {
+                        active = true;
+                        cssActive = "active";
+                    }
+                    <li class="nav-item">
+                        <a class="nav-link @cssActive" data-toggle="tab" href="#Order" role="tab">Order (@Model.Orders.Count)</a>
+                    </li>
+                }
+                @if (Model.Tickets.Any())
+                {
+                    @if (!active)
+                    {
+                        active = true;
+                        cssActive = "active";
+                    }
+                    else
+                    {
+                        cssActive = "";
+                    }
+                    <li class="nav-item">
+                        <a class="nav-link @cssActive" data-toggle="tab" href="#Ticket" role="tab">Ticket (@Model.Tickets.Count)</a>
+                    </li>
+                }
+                @if (Model.Parties.Any())
+                {
+                    @if (!active)
+                    {
+                        active = true;
+                        cssActive = "active";
+                    }
+                    else
+                    {
+                        cssActive = "";
+                    }
+                    <li class="nav-item">
+                        <a class="nav-link @cssActive" data-toggle="tab" href="#Users" role="tab">Users (@Model.Parties.Count)</a>
+                    </li>
+                }
+            </ul>
+            <div class="tab-content">
+                @if (Model.Orders.Any())
+                {
+                    if (!activeBody)
+                    {
+                        activeBody = true;
+                        cssActiveBody = "active";
+                    }
+                    <div class="tab-pane @cssActiveBody" id="Order" role="tabpanel">
+                        <table class="table table-responsive-sm table-hover table-outline mb-0">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Namen</th>
+                                    <th>Kunde</th>
+                                    <th>LastUpdated</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Orders)
+                                {
+                                    <tr>
+                                        <td>@item.Id</td>
+                                        <td><a asp-page="/Order/Index" asp-route-guid="@item.Guid">@item.Name</a></td>
+                                        <td>@item.Customer.Fullname</td>
+                                        <td>@item.LastUpdated</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+                @if (Model.Tickets.Any())
+                {
+                    @if (!activeBody)
+                    {
+                        activeBody = true;
+                        cssActiveBody = "active";
+                    }
+                    else
+                    {
+                        cssActiveBody = "";
+                    }
+
+                    <div class="tab-pane @cssActiveBody" id="Ticket" role="tabpanel">
+                        <table class="table table-responsive-sm table-hover table-outline mb-0">
+                            <thead class="thead-light">
+                                <tr>
+
+                                    <th>Id</th>
+                                    <th>Name</th>
+                                    <th>Name</th>
+                                    <th>LastUpdated</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Tickets)
+                                {
+                                    string priority = "";
+                                    switch (item.Priority)
+                                    {
+                                        case Webbasierende_Verwaltungsapplikation_fuer_KMU.Model.Priority.Highest:
+                                            priority = "badge badge-danger";
+                                            break;
+                                        case Webbasierende_Verwaltungsapplikation_fuer_KMU.Model.Priority.High:
+                                            priority = "badge badge-warning";
+                                            break;
+                                        case Webbasierende_Verwaltungsapplikation_fuer_KMU.Model.Priority.Medium:
+                                            priority = "badge badge-success";
+                                            break;
+                                        case Webbasierende_Verwaltungsapplikation_fuer_KMU.Model.Priority.Low:
+                                            priority = "badge badge-info";
+                                            break;
+                                        case Webbasierende_Verwaltungsapplikation_fuer_KMU.Model.Priority.Lowest:
+                                            priority = "badge badge-secondary";
+                                            break;
+                                    };
+                                    <tr>
+                                        <td>@item.Id</td>
+                                        <td> <a asp-page="/Ticket/Index" asp-route-guid="@item.Guid">@item.Name</a></td>
+                                        <td><a class="@priority"> @item.Priority</a></td>
+                                        <td>@item.Status.Name</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+                @if (Model.Parties.Any())
+                {
+                    @if (!activeBody)
+                    {
+                        activeBody = true;
+                        cssActiveBody = "active";
+                    }
+                    else
+                    {
+                        cssActiveBody = "";
+                    }
+                    <div class="tab-pane @cssActiveBody " id="Users" role="tabpanel">
+                        <table class="table table-responsive-sm table-hover table-outline mb-0">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Name</th>
+                                    <th>EMail</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Parties)
+                                {
+                                    string aspPage = "/404";
+                                    @switch (item.Role)
+                                    {
+
+                                        case Webbasierende_Verwaltungsapplikation_fuer_KMU.Model.Role.Company:
+                                            aspPage = "/Company/Profile";
+                                            break;
+                                        case Webbasierende_Verwaltungsapplikation_fuer_KMU.Model.Role.Customer:
+                                            aspPage = "/Customer/Profile";
+                                            break;
+                                        case Webbasierende_Verwaltungsapplikation_fuer_KMU.Model.Role.Employee:
+                                            aspPage = "/Employee/Profile";
+                                            break;
+                                    }
+                                    <tr>
+                                        <td>@item.Role</td>
+                                        <td>
+                                            @if (item.Role != Webbasierende_Verwaltungsapplikation_fuer_KMU.Model.Role.Admin)
+                                            {
+                                                <a asp-page="@aspPage" asp-route-guid="@item.Guid">@item.Fullname</a>
+                                            }
+                                            else
+                                            {
+                                                <a>@item.Fullname</a>
+                                            }
+                                        </td>
+                                        <td><a href="mailto:@item.EMail"> @item.EMail</a></td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+
+</div>

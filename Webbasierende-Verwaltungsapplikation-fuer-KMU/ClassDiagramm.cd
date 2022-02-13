@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Webbasierende_Verwaltungsapplikation_fuer_KMU.Infrastructure.Database">
+    <Position X="31" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEEBAAAEAQAgAQACAAgAQAAAGAAAAAACAAAAJAAAIAA=</HashCode>
+      <FileName>Infrastructure\Database.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Webbasierende_Verwaltungsapplikation_fuer_KMU.Infrastructure.DbAuthProvider" BaseTypeListCollapsed="true">
+    <Position X="15.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Infrastructure\DbAuthProvider.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Webbasierende_Verwaltungsapplikation_fuer_KMU.Service.Documents.PdfService" Collapsed="true">
+    <Position X="26.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQABAAAAQAABEAAACAAAAAAAAAAAAACAAAAAAAAA=</HashCode>
+      <FileName>Service\Documents\PdfService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Webbasierende_Verwaltungsapplikation_fuer_KMU.Service.EMail.EMailService" Collapsed="true">
+    <Position X="22.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAiIAAAAAAAAIAAAAAAAAAAgAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>Service\EMail\EMailService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Webbasierende_Verwaltungsapplikation_fuer_KMU.Service.Model.AddressService" Collapsed="true">
+    <Position X="13.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAgAAAAAAAAAAIA=</HashCode>
+      <FileName>Service\Model\AddressService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Webbasierende_Verwaltungsapplikation_fuer_KMU.Service.Model.CompanyService" Collapsed="true">
+    <Position X="20" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAASAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Service\Model\CompanyService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Webbasierende_Verwaltungsapplikation_fuer_KMU.Service.Model.ConversationService" Collapsed="true">
+    <Position X="24.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAAAAAAIAgAAAAAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>Service\Model\ConversationService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Webbasierende_Verwaltungsapplikation_fuer_KMU.Service.Model.CustomerService" Collapsed="true">
+    <Position X="11.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAQAAAAAAAA=</HashCode>
+      <FileName>Service\Model\CustomerService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Webbasierende_Verwaltungsapplikation_fuer_KMU.Service.Model.DocumentService" Collapsed="true">
+    <Position X="11.25" Y="4" Width="1.5" />
+    <InheritanceLine Type="Webbasierende_Verwaltungsapplikation_fuer_KMU.Service.BaseService" ManuallyRouted="true">
+      <Path>
+        <Point X="16" Y="4.5" />
+        <Point X="16" Y="3.406" />
+        <Point X="12" Y="3.406" />
+        <Point X="12" Y="4.691" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAAAAAAAAAAQEgAAAAAAAAAAAAAAAAAIA=</HashCode>
+      <FileName>Service\Model\DocumentService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Webbasierende_Verwaltungsapplikation_fuer_KMU.Service.Model.ElementService" Collapsed="true">
+    <Position X="15.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAEgAAAAAAgAAAAAAAAAAIA=</HashCode>
+      <FileName>Service\Model\ElementService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Webbasierende_Verwaltungsapplikation_fuer_KMU.Service.Model.EmployeeService" Collapsed="true">
+    <Position X="22.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>Service\Model\EmployeeService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Webbasierende_Verwaltungsapplikation_fuer_KMU.Service.Model.OperatorService" Collapsed="true">
+    <Position X="26.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Service\Model\OperatorService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Webbasierende_Verwaltungsapplikation_fuer_KMU.Service.Model.PartyService" Collapsed="true">
+    <Position X="11.25" Y="2.25" Width="1.5" />
+    <InheritanceLine Type="Webbasierende_Verwaltungsapplikation_fuer_KMU.Service.BaseService" ManuallyRouted="true">
+      <Path>
+        <Point X="16" Y="4.5" />
+        <Point X="16" Y="3.417" />
+        <Point X="12" Y="3.417" />
+        <Point X="12" Y="2.941" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAAQAAAAEAAAAAAAAAAAJAA=</HashCode>
+      <FileName>Service\Model\PartyService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Webbasierende_Verwaltungsapplikation_fuer_KMU.Service.Model.TicketService" Collapsed="true">
+    <Position X="13.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYCAAAAAAAAAAgAAAAAAAAgAAEAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>Service\Model\TicketService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Webbasierende_Verwaltungsapplikation_fuer_KMU.Service.Model.UserService" Collapsed="true">
+    <Position X="17.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAQBAAAAAAAAAEAAQBAAAA=</HashCode>
+      <FileName>Service\Model\UserService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Webbasierende_Verwaltungsapplikation_fuer_KMU.Service.BaseService" Collapsed="true">
+    <Position X="15.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEYAgAAAAAAAAAAAAAAAAAEAAAAAAAgAAAAAAAAAAIA=</HashCode>
+      <FileName>Service\Model\BaseService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Webbasierende_Verwaltungsapplikation_fuer_KMU.Service.OrderService" Collapsed="true">
+    <Position X="29" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAIAAAAAAAAAAAAQAAAEwAAEAAAgAAAAAQAAAAkA=</HashCode>
+      <FileName>Service\Model\OrderService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Webbasierende_Verwaltungsapplikation_fuer_KMU.Service.AuthService" Collapsed="true">
+    <Position X="24.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAQAAAAAAAgBBAAQQAAAAIECAAAAEAAAACCAAAIAAA=</HashCode>
+      <FileName>Service\AuthService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Webbasierende_Verwaltungsapplikation_fuer_KMU.Service.BlobService" Collapsed="true">
+    <Position X="29" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAQABAAAAAAAAAgAAAAAAAAQAAgAAAAAAIA=</HashCode>
+      <FileName>Service\BlobService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="System.Object" Collapsed="true">
+    <Position X="20.25" Y="1" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Interface Name="Webbasierende_Verwaltungsapplikation_fuer_KMU.Infrastructure.IAuthProvider" Collapsed="true">
+    <Position X="35.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Infrastructure\IAuthProvider.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
